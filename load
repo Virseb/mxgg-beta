@@ -13,16 +13,17 @@ function intro.id(id)
     interface.Size = UDim2.new(0.01, 0, 0.1, 0)
     interface.Name = "int"
     gui.Name = "#betagui"
-    
+    interface.Position = UDim2.new(0.5,0,0.5,0)
+interface.Text = ""
     return tostring(RandomIdPart.Name)
 end
 
 function intro.unpack(SecuredPartName)
     local mxgui = game.ReplicatedStorage:FindFirstChild(SecuredPartName)
-    local guiclone = mxgui["#betagui"]:Clone()
-    guiclone.Parent = game.Players.LocalPlayer.PlayerGui
+    local guiclone = mxgui["#betagui"]:Clone(game.Players.LocalPlayer.PlayerGui)
     
-    local interface = mxgui.int
+    
+    local interface = guiclone.int
     local blur = Instance.new("BlurEffect")
     blur.Size = 0
     blur.Parent = game.Lighting
