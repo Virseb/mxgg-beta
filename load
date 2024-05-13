@@ -1,0 +1,57 @@
+local intro = {}
+
+function intro.id(id)
+    local RandomIdPart = Instance.new("Part")
+    local gui = Instance.new("ScreenGui")
+    local interface = Instance.new("Frame")
+    
+    RandomIdPart.Parent = game.ReplicatedStorage
+    gui.Parent = RandomIdPart
+    RandomIdPart.Name = tostring(id .. ":beta")
+    interface.Parent = gui
+    interface.AnchorPoint = Vector2.new(0.5, 0.5)
+    interface.Size = UDim2.new(0.01, 0, 0.1, 0)
+    interface.Name = "int"
+    gui.Name = "#betagui"
+    
+    return tostring(RandomIdPart.Name)
+end
+
+function intro.unpack(SecuredPartName)
+    local mxgui = game.ReplicatedStorage:FindFirstChild(SecuredPartName)
+    local guiclone = mxgui["#betagui"]:Clone()
+    guiclone.Parent = game.Players.LocalPlayer.PlayerGui
+    
+    local interface = mxgui.int
+    local blur = Instance.new("BlurEffect")
+    blur.Size = 0
+    blur.Parent = game.Lighting
+    
+    local goal = {
+        size = UDim2.new(0.34, 0, 0.1, 0)
+    }
+    
+    local tweenInfo = TweenInfo.new(3, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut, -1, false, 0)
+    
+    local tween = game:GetService("TweenService"):Create(interface, tweenInfo, goal)
+    tween:Play()
+    
+    local camera = game.Workspace.CurrentCamera
+    
+    local povAndFOVGoal = {
+        FieldOfView = camera.FieldOfView - 20,
+        CFrame = camera.CFrame * CFrame.new(0, 0, -20)
+    }
+    
+    local povAndFOVTween = game:GetService("TweenService"):Create(camera, tweenInfo, povAndFOVGoal)
+    povAndFOVTween:Play()
+    
+    local blurGoal = {
+        size = 10
+    }
+    
+    local blurTween = game:GetService("TweenService"):Create(blur, tweenInfo, blurGoal)
+    blurTween:Play()
+end
+
+return intro
