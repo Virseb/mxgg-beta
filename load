@@ -27,13 +27,9 @@ function intro.unpack(SecuredPartName)
         blur.Size = 0
         blur.Parent = game.Lighting
         
-        local goal = {
-            interface = {Size = UDim2.new(0.34, 0, 0.1, 0)}
-        }
-        
         local tweenInfo = TweenInfo.new(3, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut, -1, false, 0)
         
-        local tween = game:GetService("TweenService"):Create(interface, tweenInfo, goal)
+        local tween = game:GetService("TweenService"):Create(interface, tweenInfo, {Size = UDim2.new(0.34, 0, 0.1, 0)})
         tween:Play()
         
         local camera = game.Workspace.CurrentCamera
@@ -47,7 +43,7 @@ function intro.unpack(SecuredPartName)
         povAndFOVTween:Play()
         
         local blurGoal = {
-            blur = {Size = 10}
+            Size = 10
         }
         
         local blurTween = game:GetService("TweenService"):Create(blur, tweenInfo, blurGoal)
